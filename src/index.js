@@ -52,6 +52,9 @@ const genres = (state = [], action) => {
     }
 }
 
+// Add Sagas for GET and POST
+
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
