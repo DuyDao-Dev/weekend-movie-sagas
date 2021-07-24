@@ -21,7 +21,7 @@ function MovieList() {
         // dispatch({type: 'SET_MOVIES', payload: movie})
         // History will take user to details page for the movie poster clicked on.
         dispatch({ type: 'MOVIE_DETAILS', payload: movie })
-        history.push(`/movieDetail`) 
+        history.push('/movieDetail');
 
     }
 
