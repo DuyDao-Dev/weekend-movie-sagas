@@ -13,9 +13,10 @@ function MovieList() {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
-    const handlePhotoClick = {
-        event.preventDefault();
-        history.push('/DetailsPage');
+    const handleMovieDetails = (movie) => {
+        dispatch({type: 'GET_GENRES', payload: movie})
+        history.push(`/details/${movie}`)
+
     }
 
     return (
@@ -29,7 +30,7 @@ function MovieList() {
                             <img 
                             src={movie.poster} 
                             alt={movie.title}
-                            onClick={() => {handlePhotoClick(movie.poster.id)}}/>
+                            onClick={() => {handleMovieDetails(movie.id)}}/>
                         </div>
                     );
                 })}
