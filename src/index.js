@@ -52,7 +52,7 @@ const movieDetails = (state = 0, action) => {
 function* fetchAllMovies() {
   // get all movies from the DB
   try {
-    const movies = yield axios.get("/api/movie");
+    const movies = yield axios.get("/api/movie"); //const movie is like const response
     console.log("get all:", movies.data);
     yield put({ type: "SET_MOVIES", payload: movies.data });
   } catch {
@@ -71,6 +71,17 @@ function* fetchGenres() {
     console.log("Error GETing genres", error);
   }
 }
+
+// Do I really need a 3rd Saga? fetchAllMovies should pull in all the data from movie table.
+// function* fetchDetails() {
+//   try {
+//     const genres = yield axios.get(`/api/movies/`);
+//     yield put({ type: "MOVIE_DETAILS", payload: response.data });
+//     console.log("GETting data from GET Saga", response.data);
+//   } catch (error) {
+//     console.log("Error GETing genres", error);
+//   }
+// }
 
 // function* postGenres(action) {
 //   try {

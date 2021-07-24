@@ -16,11 +16,12 @@ function MovieList() {
     const handleMovieDetails = (movie) => {
         console.log(`What is movie doing in MovieList handler?`, movie);
         //Goes to Saga fetchGenres but stores in state for genres Reducer.
-        dispatch({type: 'FETCH_GENRES', payload: movie})
-        // Stores in state for movies Reducer.
-        dispatch({type: 'MOVIE_DETAILS', payload: movie})
+        // dispatch({type: 'FETCH_GENRES', payload: movie})
+        // // Stores in state for movies Reducer.
+        // dispatch({type: 'SET_MOVIES', payload: movie})
         // History will take user to details page for the movie poster clicked on.
-        history.push(`/details/${movie}`) 
+        dispatch({ type: 'MOVIE_DETAILS', payload: movie })
+        history.push(`/movieDetail`) 
 
     }
 
