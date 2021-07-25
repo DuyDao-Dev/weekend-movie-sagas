@@ -3,81 +3,68 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './AddMovie.css'
 
-function AddMovie () {
-
-    const genres = useSelector(store => store.genres);
+function AddMovie() {
     const history = useHistory();
+    const dispatch = useDispatch();
     const [title, setTitle] = useState('');
-    const [posterUrl, setPosterUrl] = useState('');
+    const [url, setURL] = useState('');
     const [description, setDescription] = useState('');
-    const [genre, setGenre] = useState('');
-    
-    const genreHandler = [{value: 0, 
-      label: "Select An Option"}, 
-      {value: 1, label: "Adventure"}, 
-      {value: 2, label: "Animated"}, 
-      {value: 3, label: "Biographical"}, 
-      {value: 4, label: "Comedy"}, 
-      {value: 5, label: "Disaster"}, 
-      {value: 6, label: "Drama"}, 
-      {value: 7, label: "Epic"}, 
-      {value: 8, label: "Fantasy"}, 
-      {value: 9, label: "Musical"}, 
-      {value: 10, label: "Romantic"}, 
-      {value: 11, label: "Science Fiction"}, 
-      {value: 12, label: "Space-Opera"}, 
-      {value: 13, label: "Superhero"}
-    ];
+    const [genre, setGenre] = useState('')
+    const genres = useSelector(store => store.genres);
 
-
-    const handleNewMovie = (event) => {
-        dispatch({ type: "ADD_MOVIE"})
-        console.log('event happened', event.target.id);
-
+    const addMovieData = () => {
+        event.preventDefault();
+      const  newMovie = 
+     {title: title, 
+      poster: url, 
+      description: description, 
+      genre_id: genre}
+        dispatch({type: 'ADD_MOVIE', payload: newMovie})
+        setDescription('')
+        setTitle('')
+        setURL('')
+        
+    }
+    const goHome = () => {
+        history.push('/')
     }
 
     return (
-        <form>
-          <input
-          id="title"
-            type="text"
-            placeholder="Movie Title"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-          />
-          <input
-          id="posterUrl"
-            type="text"
-            placeholder="Movie URL"
-            value={posterUrl}
-            onChange={(event) => setPosterUrl(event.target.value)}
-          />          <input
-          id="description"
-            type="text"
-            placeholder="Movie Description"
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
-          />          
-            <div className="dropdown">
-                <button className="dropbtn">Dropdown</button>
-                    <div className="dropdown-content">
-                        <a href="#" onClick={(event) => genreHandler(1)}>Adventure</a>
-                        <a href="#" onClick={(event) => genreHandler(2)}>Animated</a>
-                        <a href="#" onClick={(event) => genreHandler(3)}>Biographical</a>
-                        <a href="#" onClick={(event) => genreHandler(4)}>Comedy</a>
-                        <a href="#" onClick={(event) => genreHandler(5)}>Disaster</a>
-                        <a href="#" onClick={(event) => genreHandler(6)}>Drama</a>
-                        <a href="#" onClick={(event) => genreHandler(7)}>Epic</a>
-                        <a href="#" onClick={(event) => genreHandler(8)}>Fantasy</a>
-                        <a href="#" onClick={(event) => genreHandler(9)}>Musical</a>
-                        <a href="#" onClick={(event) => genreHandler(10)}>Romantic</a>
-                        <a href="#" onClick={(event) => genreHandler(11)}>Science Fiction</a>
-                        <a href="#" onClick={(event) => genreHandler(12)}>Space-Opera</a>
-                        <a href="#" onClick={(event) => genreHandler(13)}>Superhero</a>
-                        <button>Add Movie</button>
-                    </div>
-            </div>
-        </form>
+
+<section>
+    <center>
+    <form action="submit">
+    <h1>Add Movie to Library</h1>
+    <h2>Name</h2>
+    <input type="text" value={title} placeholder='Movie Title' onChange={(evt) => setTitle(evt.target.value)} required/>
+    <h2>Image</h2>
+    <input type="text" value={url} placeholder='Insert Movie Image URL Here' onChange={(evt) => setURL('images/captain-marvel.jpg')} required/>
+    <h2>Description</h2>
+    <textarea value={description} placeholder='Insert Movie Description Here' rows="4" cols="50" onChange={(evt) => setDescription(evt.target.value)}></textarea>
+      <div className="dropdown">
+        <button className="dropbtn">Genre</button>
+        <div className="dropdown-content">
+          <a onClick={(event) => setGenre(1)} >Adventure</a>
+          <a onClick={(event) => setGenre(2)} >Animated</a>
+          <a onClick={(event) => setGenre(3)} >Biographical</a>
+          <a onClick={(event) => setGenre(4)} >Comedy</a>
+          <a onClick={(event) => setGenre(5)} >Disaster</a>
+          <a onClick={(event) => setGenre(6)} >Drama</a>
+          <a onClick={(event) => setGenre(7)} >Epic</a>
+          <a onClick={(event) => setGenre(8)} >Fantacy</a>
+          <a onClick={(event) => setGenre(9)} >Musical</a>
+          <a onClick={(event) => setGenre(10)} >Romantic</a>
+          <a onClick={(event) => setGenre(11)} >Science Fiction</a>
+          <a onClick={(event) => setGenre(12)} >Space-Opera</a>
+          <a onClick={(event) => setGenre(13)} >Superhero</a>
+          <button type='submit' onClick={() => addMovieData()}>Save</button>
+          <button type='submit' onClick={() => goHome()}>Go to Homepage</button>
+        </div>
+      </div>
+    </form>
+   
+    </center>
+</section>
     )
 }
 
