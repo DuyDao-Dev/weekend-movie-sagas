@@ -15,6 +15,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_GENRES', fetchGenres);
+    yield takeEvery('ADD_MOVIE', addNewMovie);
 }
 
 // Create sagaMiddleware
@@ -69,18 +70,6 @@ function* fetchAllMovies() {
   }
 }
 
-
-// function* fetchGenres(movieId) {
-//   try {
-//     const response = 
-//     yield axios.get(`/api/genre/${movieId}`);
-//     yield put({ type: "SET_GENRES", payload: response.data });
-//     console.log("GETting data from GET Saga", response.data);
-//   } catch (error) {
-//     console.log("Error GETing genres", error);
-//   }
-// }
-
 function* fetchGenres(action) {
   // get all genres from the DB
   // Use action 
@@ -93,27 +82,16 @@ function* fetchGenres(action) {
   }
 }
 
-// Do I really need a 3rd Saga? fetchAllMovies should pull in all the data from movie table.
-// function* fetchDetails() {
-//   try {
-//     const genres = yield axios.get(`/api/movies/`);
-//     yield put({ type: "MOVIE_DETAILS", payload: response.data });
-//     console.log("GETting data from GET Saga", response.data);
-//   } catch (error) {
-//     console.log("Error GETing genres", error);
-//   }
-// }
-
-// function* postGenres(action) {
-//   try {
-//     const genres = 
-//     yield axios.post(`/api/genre/`, action.payload);
-//     yield put({ type: "FETCH_GENRES" });
-//     console.log("GETting data from GET Saga", response.data);
-//   } catch (error) {
-//     console.log("Error GETing genres", error);
-//   }
-// }
+function* addNewMovie(action) {
+  try {
+    const genres = 
+    yield axios.post(`/api/movie/`, action.payload);
+    yield put({ type: "FETCH_MOVIE" });
+    console.log("GETting data from GET Saga", response.data);
+  } catch (error) {
+    console.log("Error adding new movie from POST saga", error);
+  }
+}
 
 // Create one store that all components can use
 const storeInstance = createStore(
