@@ -38,7 +38,7 @@ function AddMovie() {
     <h2>Name</h2>
     <input type="text" value={title} placeholder='Movie Title' onChange={(evt) => setTitle(evt.target.value)} required/>
     <h2>Image</h2>
-    <input type="text" value={url} placeholder='Insert Movie Image URL Here' onChange={(evt) => setURL('images/captain-marvel.jpg')} required/>
+    <input type="text" value={url} placeholder='Insert Movie Image URL Here' onChange={(evt) => setURL(evt.target.value)} required/>
     <h2>Description</h2>
     <textarea value={description} placeholder='Insert Movie Description Here' rows="4" cols="50" onChange={(evt) => setDescription(evt.target.value)}></textarea>
       <div className="dropdown">
@@ -51,7 +51,7 @@ function AddMovie() {
           <a onClick={(event) => setGenre(5)} >Disaster</a>
           <a onClick={(event) => setGenre(6)} >Drama</a>
           <a onClick={(event) => setGenre(7)} >Epic</a>
-          <a onClick={(event) => setGenre(8)} >Fantacy</a>
+          <a onClick={(event) => setGenre(8)} >Fantasy</a>
           <a onClick={(event) => setGenre(9)} >Musical</a>
           <a onClick={(event) => setGenre(10)} >Romantic</a>
           <a onClick={(event) => setGenre(11)} >Science Fiction</a>

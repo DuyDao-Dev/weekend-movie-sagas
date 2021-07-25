@@ -72,9 +72,9 @@ function* fetchAllMovies() {
 
 function* fetchGenres(action) {
   // get all genres from the DB
-  // Use action 
+  // Use action because we need to target something specific from database.
   try {
-    const genre = yield axios.get(`/api/genre/${action.payload}`); //const movie is like const response
+    const genre = yield axios.get(`/api/genre/${action.payload}`); //const genre is like const response
     console.log("I want to GET all genres:", genre.data);
     yield put({ type: "SET_GENRES", payload: genre.data });
   } catch {
