@@ -26,4 +26,24 @@ router.get('/:id', (req, res) => {
 
 });
 
+router.get("/all", (req, res) => {
+  const genreId = req.params.id;
+  console.log(`What is req.params.id on genre.router doing?`, req.params.id);
+  // Add query to get all genres
+  const allGenreQuery = `
+    SELECT *
+    FROM genres;`;
+
+  console.log(`What is genreList doing?`, movieId);
+  pool
+    .query(allGenreQuery, [genreId])
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log("ERROR: Get all matching movies genre", err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;

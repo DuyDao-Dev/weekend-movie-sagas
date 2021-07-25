@@ -2,6 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './AddMovie.css'
+import {
+  Card,
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  Button,
+  Grid,
+  makeStyles,
+} from "@material-ui/core";
+
+const useStyles = makeStyles ({
+  root: {
+    maxWidth: 300,
+  },
+  media: {
+    height: 300,
+  },
+});
 
 function AddMovie() {
     const history = useHistory();
@@ -11,6 +29,10 @@ function AddMovie() {
     const [description, setDescription] = useState('');
     const [genre, setGenre] = useState('')
     const genres = useSelector(store => store.genres);
+
+    useEffect(() => {
+    dispatch({ type: 'FETCH_MOVIES' });
+    }, []);
 
     const addMovieData = () => {
         event.preventDefault();
@@ -30,8 +52,58 @@ function AddMovie() {
     }
 
     return (
+    <Grid container>
+      {favoriteReducer.map((gif) => {
+        return (
+          <Card key={gif.id} className={classes.root}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                image={gif.url}
+                className={classes.media}
+              />
+              <CardContent>
+                <form>
+                    <p>Please choose a Genre</p>
+                  {genres.map((genre) => {
+                    return (
+                    <>
+                  <input
+                    key={genre.id}
+                    type="dropdown"
+                    name="genreOption"
+                    value={genre.name}
+                    id= {genre.name}
+                    onChange={(event) =>
+                      setNewGenre(event.target.value)
+                    }
+                    required
+                  />
+                  <label htmlFor= {category.name} > {category.name} </label>
+                  </>
+                    )})}
+                  <Button type="submit" variant="contained" color="primary" onClick={()=>{setNewGenre(genre.id)}}>
+                    Add New Movie
+                  </Button>
+                </form>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        );
+      })}
+    </Grid>
 
-<section>
+    )
+}
+
+export default AddMovie;
+
+
+
+
+
+//This is working code that sits in return.
+{/* <section>
     <center>
     <form action="submit">
     <h1>Add Movie to Library</h1>
@@ -64,8 +136,4 @@ function AddMovie() {
     </form>
    
     </center>
-</section>
-    )
-}
-
-export default AddMovie;
+</section> */}

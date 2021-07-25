@@ -86,10 +86,22 @@ function* addNewMovie(action) {
   try {
     const genres = 
     yield axios.post(`/api/movie/`, action.payload);
-    yield put({ type: "FETCH_MOVIE" });
+    yield put({ type: "FETCH_MOVIES" });
     console.log("GETting data from GET Saga", response.data);
   } catch (error) {
     console.log("Error adding new movie from POST saga", error);
+  }
+}
+
+function* fetchAllGenres(action) {
+  // get all genres from the DB
+  // Use action because we need to target something specific from database.
+  try {
+    const genre = yield axios.get(`/api/genre/all`); //const genre is like const response
+    console.log("I want to GET all genres:", genre.data);
+    yield put({ type: "SET_GENRES", payload: genre.data });
+  } catch {
+    console.log("Genre GET all error");
   }
 }
 

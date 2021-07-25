@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"; 
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 function MovieDetails () {
 
@@ -9,6 +9,7 @@ function MovieDetails () {
     const movieDetails = useSelector(store => store.movieDetails);
     const genres = useSelector(store => store.genres);
     const history = useHistory();
+    const {movieId} = useParams();
 
     // bring in data from genres and movies
 
