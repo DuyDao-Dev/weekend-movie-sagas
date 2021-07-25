@@ -9,18 +9,20 @@ function MovieDetails () {
     const movieDetails = useSelector(store => store.movieDetails);
     const genres = useSelector(store => store.genres);
     const history = useHistory();
-    // const history = useHistory();
-    // const [newCategory, setSomething] = useState("");//What do I need to hold?
 
     // bring in data from genres and movies
 
     useEffect(() => {
-        // placeholder();
-        // dispatch({ type: 'FETCH_MOVIES' });
         console.log("in use effect");
+        console.log (`What is in genres`, genres);
+        // getGenres(movies[movieDetails-1].id);
+        console.log(`What is the movie`,movies[movieDetails-1].id)
     }, []);
 
-    
+    const getGenres = (movieId) => {
+    dispatch({ type: "FETCH_GENRES", payload: movieId });
+    };
+
     const handleHomeClick = () => {
         history.push('/');
     }
@@ -34,17 +36,17 @@ function MovieDetails () {
              <h1>{movies[movieDetails-1].title}</h1>
              <img src={movies[movieDetails-1].poster}></img>
              <p>{movies[movieDetails-1].description}</p>
-             <table>
-                 <th>Genres</th>
-                 <tbody>
-                    {genres.map((genre, index) => {
+             <form>
+                 <p>Genres</p>
+                 <p>
+                    {genres.map((genre) => {
                         return (
-                        <td key={index}>{genre.name}</td>
+                        <p key={genre}>{genre.name}</p>
                         );
                     })}
-                 </tbody>
+                 </p>
                  <button onClick={() => handleHomeClick()}>Homepage</button>
-             </table>
+             </form>
          </section>
     )
 }
@@ -52,3 +54,14 @@ function MovieDetails () {
 export default MovieDetails;
 
 //Setup a GET request on router with req.params and :id. (DONE. Tested in Postman)
+
+//This is the old map code. The index is no longer needed because
+//we brought in the genre ID and the genres itself because we 
+//added the genres.id in the SELECT in the genres.router.js
+{/* <p>
+    {genres.map((genre, index) => {
+        return (
+            <p key={index}>{genre.name}</p>
+        ;
+    })}
+</p> */}

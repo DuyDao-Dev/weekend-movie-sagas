@@ -48,11 +48,20 @@ const movieDetails = (state = 0, action) => {
   return state;
 };
 
+const genreDetails = (state = 0, action) => {
+  if (action.type === "GENRE_DETAILS") {
+    return (state = action.payload);
+  }
+  return state;
+};
+
+
 // Add Sagas for GET and POST
 function* fetchAllMovies() {
   // get all movies from the DB
   try {
-    const movies = yield axios.get("/api/movie"); //const movie is like const response
+    const movies = 
+    yield axios.get("/api/movie"); //const movie is like const response
     console.log("get all:", movies.data);
     yield put({ type: "SET_MOVIES", payload: movies.data });
   } catch {
@@ -61,14 +70,26 @@ function* fetchAllMovies() {
 }
 
 
-function* fetchGenres() {
+// function* fetchGenres(movieId) {
+//   try {
+//     const response = 
+//     yield axios.get(`/api/genre/${movieId}`);
+//     yield put({ type: "SET_GENRES", payload: response.data });
+//     console.log("GETting data from GET Saga", response.data);
+//   } catch (error) {
+//     console.log("Error GETing genres", error);
+//   }
+// }
+
+function* fetchGenres(action) {
+  // get all genres from the DB
+  // Use action 
   try {
-    const genres = 
-    yield axios.get(`/api/genre/`);
-    yield put({ type: "SET_GENRES", payload: response.data });
-    console.log("GETting data from GET Saga", response.data);
-  } catch (error) {
-    console.log("Error GETing genres", error);
+    const genre = yield axios.get(`/api/genre/${action.payload}`); //const movie is like const response
+    console.log("I want to GET all genres:", genre.data);
+    yield put({ type: "SET_GENRES", payload: genre.data });
+  } catch {
+    console.log("Genre GET all error");
   }
 }
 
