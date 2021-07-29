@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
 
 });
 
-router.get("/all", (req, res) => {
+router.get('/all', (req, res) => {
   const genreId = req.params.id;
   console.log(`What is req.params.id on genre.router doing?`, req.params.id);
   // Add query to get all genres

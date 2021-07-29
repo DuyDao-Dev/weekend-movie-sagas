@@ -49,12 +49,12 @@ const movieDetails = (state = 0, action) => {
   return state;
 };
 
-const genreDetails = (state = 0, action) => {
-  if (action.type === "GENRE_DETAILS") {
-    return (state = action.payload);
-  }
-  return state;
-};
+// const genreDetails = (state = 0, action) => {
+//   if (action.type === "GENRE_DETAILS") {
+//     return (state = action.payload);
+//   }
+//   return state;
+// };
 
 
 // Add Sagas for GET and POST

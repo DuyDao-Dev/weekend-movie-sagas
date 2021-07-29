@@ -45,11 +45,9 @@ function AddMovie() {
         setDescription('')
         setTitle('')
         setURL('')
-        
-    }
-    const goHome = () => {
         history.push('/')
     }
+
 
     return (
     <section>
@@ -59,9 +57,9 @@ function AddMovie() {
     <h2>Name</h2>
     <input type="text" value={title} placeholder='Movie Title' onChange={(evt) => setTitle(evt.target.value)} required/>
     <h2>Image</h2>
-    <input type="text" value={url} placeholder='Insert Movie Image URL Here' onChange={(evt) => setURL(evt.target.value)} required/>
+    <input type="text" value={url} placeholder='Movie Image URL' onChange={(evt) => setURL(evt.target.value)} required/>
     <h2>Description</h2>
-    <textarea value={description} placeholder='Insert Movie Description Here' rows="4" cols="50" onChange={(evt) => setDescription(evt.target.value)}></textarea>
+    <textarea value={description} placeholder='Movie Description' rows="4" cols="50" onChange={(evt) => setDescription(evt.target.value)}></textarea>
       <div className="dropdown">
         <button className="dropbtn">Genre</button>
         <div className="dropdown-content">
@@ -78,9 +76,8 @@ function AddMovie() {
           <a onClick={(event) => setGenre(11)} >Science Fiction</a>
           <a onClick={(event) => setGenre(12)} >Space-Opera</a>
           <a onClick={(event) => setGenre(13)} >Superhero</a>
-          <button type='submit' onClick={() => addMovieData()}>Save</button>
-          <button type='submit' onClick={() => goHome()}>Go to Homepage</button>
         </div>
+        <button type='submit' onClick={() => addMovieData()}>Add Movie</button>
       </div>
     </form>
    
